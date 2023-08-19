@@ -1,5 +1,5 @@
-#ifndef PARCER_H_
-#define PARCER_H_
+#ifndef CPP4_3DVIEWER_V2_0_1_SRC_MODEL_PARCER_PARCER_H_
+#define CPP4_3DVIEWER_V2_0_1_SRC_MODEL_PARCER_PARCER_H_
 
 #include <fstream>
 #include <sstream>
@@ -38,4 +38,4 @@ private:
   Read *read_;
 };
 } // namespace s21
-#endif // PARCER_H_
+#endif // CPP4_3DVIEWER_V2_0_1_SRC_MODEL_PARCER_PARCER_H_

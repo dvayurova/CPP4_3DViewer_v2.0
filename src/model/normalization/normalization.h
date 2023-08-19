@@ -1,7 +1,7 @@
-#ifndef NORMALIZATION_H_
-#define NORMALIZATION_H_
+#ifndef CPP4_3DVIEWER_V2_0_1_SRC_MODEL_NORMALIZATION_NORMALIZATION_H_
+#define CPP4_3DVIEWER_V2_0_1_SRC_MODEL_NORMALIZATION_NORMALIZATION_H_
 
-#include "../transform_strategy/transformation.h"
+#include "../transform/transformation.h"
 
 namespace s21 {
 class Normalization {
@@ -19,4 +19,4 @@ private:
 
 } // namespace s21
 
-#endif // NORMALIZATION_H_
+#endif // CPP4_3DVIEWER_V2_0_1_SRC_MODEL_NORMALIZATION_NORMALIZATION_H_

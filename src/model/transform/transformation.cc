@@ -6,45 +6,45 @@ void Transformation::Scale(DataModel &model, Transform &transform) {
   double scale = 0;
   double max_vertex = 0;
   max_vertex =
-      *(std::max_element(model.vertexes_.begin(), model.vertexes_.end()));
+      *(std::max_element(model.vertexes.begin(), model.vertexes.end()));
   if (max_vertex != 0)
     scale = (transform.value - transform.value * -1) / max_vertex;
-  size_t size = model.vertexes_.size();
+  size_t size = model.vertexes.size();
   for (size_t i = 0; i < size; i += 3) {
-    model.vertexes_[i] *= scale;
-    model.vertexes_[i + 1] *= scale;
-    model.vertexes_[i + 2] *= scale;
+    model.vertexes[i] *= scale;
+    model.vertexes[i + 1] *= scale;
+    model.vertexes[i + 2] *= scale;
   }
 }
 
 void Transformation::Translate(DataModel &model, Transform &transform) {
-  size_t size = model.vertexes_.size();
+  size_t size = model.vertexes.size();
   for (size_t i = 0; i < size; i += 3) {
-    double tmp = model.vertexes_[i + transform.axis];
-    model.vertexes_[i + transform.axis] =
-        tmp + transform.value - transform.prev_coor_[transform.axis];
+    double tmp = model.vertexes[i + transform.axis];
+    model.vertexes[i + transform.axis] =
+        tmp + transform.value - transform.prev_coor[transform.axis];
   }
-  transform.prev_coor_[transform.axis] = transform.value;
+  transform.prev_coor[transform.axis] = transform.value;
 }
 
 void Transformation::Rotate(DataModel &model, Transform &transform) {
   double angle = GetAngle(transform);
   double cos_value = cos(angle);
   double sin_value = sin(angle);
-  size_t size = model.vertexes_.size();
+  size_t size = model.vertexes.size();
   for (size_t i = 0; i < size; i += 3) {
-    double temp_x = model.vertexes_[i];
-    double temp_y = model.vertexes_[i + 1];
-    double temp_z = model.vertexes_[i + 2];
+    double temp_x = model.vertexes[i];
+    double temp_y = model.vertexes[i + 1];
+    double temp_z = model.vertexes[i + 2];
     if (transform.axis == kX) {
-      model.vertexes_[i + 1] = cos_value * temp_y - sin_value * temp_z;
-      model.vertexes_[i + 2] = sin_value * temp_y + cos_value * temp_z;
+      model.vertexes[i + 1] = cos_value * temp_y - sin_value * temp_z;
+      model.vertexes[i + 2] = sin_value * temp_y + cos_value * temp_z;
     } else if (transform.axis == kY) {
-      model.vertexes_[i] = cos_value * temp_x - sin_value * temp_z;
-      model.vertexes_[i + 2] = sin_value * temp_x + cos_value * temp_z;
+      model.vertexes[i] = cos_value * temp_x - sin_value * temp_z;
+      model.vertexes[i + 2] = sin_value * temp_x + cos_value * temp_z;
     } else if (transform.axis == kZ) {
-      model.vertexes_[i] = cos_value * temp_x - sin_value * temp_y;
-      model.vertexes_[i + 1] = sin_value * temp_x + cos_value * temp_y;
+      model.vertexes[i] = cos_value * temp_x - sin_value * temp_y;
+      model.vertexes[i + 1] = sin_value * temp_x + cos_value * temp_y;
     }
   }
   SavePrevAngle(transform);

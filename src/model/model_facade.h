@@ -1,5 +1,5 @@
-#ifndef MODEL_H_
-#define MODEL_H_
+#ifndef CPP4_3DVIEWER_V2_0_1_SRC_MODEL_MODEL_H_
+#define CPP4_3DVIEWER_V2_0_1_SRC_MODEL_MODEL_H_
 
 #include "normalization/normalization.h"
 #include "parcer/parcer.h"
@@ -10,12 +10,12 @@ class Model {
 public:
   Model() {
     object_ = new DataModel;
-    transform_ = new Transform;
+    transform_info_ = new Transform;
   }
 
   ~Model() {
     delete object_;
-    delete transform_;
+    delete transform_info_;
     delete parcer_;
   }
   void ChangeModel(std::string action, double value, int axis);
@@ -34,9 +34,9 @@ private:
   Normalization normalization_{};
   Transformation transformation_;
   DataModel *object_;
-  Transform *transform_;
+  Transform *transform_info_;
   Parser *parcer_;
 };
 } // namespace s21
 
-#endif // MODEL_H_
+#endif // CPP4_3DVIEWER_V2_0_1_SRC_MODEL_MODEL_H_

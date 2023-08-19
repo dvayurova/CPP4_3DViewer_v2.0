@@ -1,5 +1,5 @@
-#ifndef WIDGET_H
-#define WIDGET_H
+#ifndef CPP4_3DVIEWER_V2_0_1_SRC_VIEW_3D_VIEWER_WIDGET_H
+#define CPP4_3DVIEWER_V2_0_1_SRC_VIEW_3D_VIEWER_WIDGET_H
 
 #define GL_SILENCE_DEPRECATION
 
@@ -25,20 +25,23 @@ public:
   ~Widget();
 
 private:
-  Ui::Widget *ui;
+  Ui::Widget *ui_;
   Controller *controller_;
 
   void initializeGL() override;
-  void resizeGL(int w, int h) override;
+  // void resizeGL(int w, int h) override;
   void paintGL() override;
-  void draw();
+  void Draw();
 
   void LabelSettings();
   void ConnectLabels();
   void SetDefaultValues();
   static constexpr double kStepDown = -0.01;
   static constexpr double kStepUp = 0.01;
-  int file_exists;
+  bool file_exists_;
+  QIntValidator *rotation_validator_;
+  QDoubleValidator *move_validator_;
+  QDoubleValidator *scale_validator_;
 
 private slots:
   void on_pushButton_clicked();
@@ -60,4 +63,4 @@ private slots:
 };
 
 } // namespace s21
-#endif // WIDGET_H
+#endif // CPP4_3DVIEWER_V2_0_1_SRC_VIEW_3D_VIEWER_WIDGET_H

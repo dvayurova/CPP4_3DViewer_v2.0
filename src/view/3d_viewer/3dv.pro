@@ -13,7 +13,7 @@ CONFIG += fsanitize=address
 SOURCES += \
     ../../main.cc \
     widget.cc \
-    ../../model/transform_strategy/transformation.cc \
+    ../../model/transform/transformation.cc \
     ../../model/parcer/parcer.cc \
     ../../model/normalization/normalization.cc \
     ../../model/model_facade.cc \
@@ -21,7 +21,7 @@ SOURCES += \
 
 HEADERS += \
     widget.h \
-    ../../model/transform_strategy/transformation.h \
+    ../../model/transform/transformation.h \
     ../../model/parcer/parcer.h \
     ../../model/data/data_model.h \
     ../../model/normalization/normalization.h \

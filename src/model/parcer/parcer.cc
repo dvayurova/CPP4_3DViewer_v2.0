@@ -9,18 +9,18 @@ bool ReadOne::Search(std::string file_name, DataModel *data_model) {
     std::string str = "";
     while (std::getline(fp, str)) {
       if (str[0] == 'v' && str[1] == ' ') {
-        data_model->count_vertex_ += 3;
+        data_model->count_vertex += 3;
       }
       if (str[0] == 'f' && str[1] == ' ') {
-        data_model->count_edges_++;
-        data_model->count_facets_ += getCountMemory(str);
+        data_model->count_edges++;
+        data_model->count_facets += getCountMemory(str);
       }
     }
     fp.close();
   } else {
     res = false;
   }
-  if ((!data_model->count_vertex_) || (!data_model->count_edges_)) {
+  if ((!data_model->count_vertex) || (!data_model->count_edges)) {
     res = false;
   }
   return res;
@@ -52,7 +52,7 @@ bool ReadTwo::Search(std::string file_name, DataModel *data_model) {
   } else {
     res = false;
   }
-  if ((data_model->facets_.empty()) || (data_model->vertexes_.empty())) {
+  if ((data_model->facets.empty()) || (data_model->vertexes.empty())) {
     res = false;
   }
 
@@ -60,15 +60,13 @@ bool ReadTwo::Search(std::string file_name, DataModel *data_model) {
 }
 
 bool ReadTwo::getDigit(std::string &str, DataModel *data_model) {
-  bool res = true; // возможно нужно переделать на void
+  bool res = true;
   std::stringstream ss(str);
   std::string buffer;
-  // int step = 0;
-  // unsigned int first_element = 0;
   if (str[0] == 'v') {
     while (std::getline(ss, buffer, ' ')) {
       if ((isdigit(buffer[0]) || (isdigit(buffer[1])))) {
-        data_model->vertexes_.push_back(stof(buffer));
+        data_model->vertexes.push_back(stof(buffer));
       }
     }
   }
@@ -81,7 +79,7 @@ bool ReadTwo::getDigit(std::string &str, DataModel *data_model) {
       }
     }
     if (step) {
-      data_model->facets_.push_back(first_element - 1);
+      data_model->facets.push_back(first_element - 1);
     }
   }
   return res;
@@ -95,17 +93,17 @@ void ReadTwo::PushToFacets(std::string &str, unsigned int &first_element,
     step = 1;
     x = stof(str);
     if (x < 0) {
-      x = data_model->count_facets_ + x;
+      x = data_model->count_facets + x;
     }
     first_element = x;
-    data_model->facets_.push_back(first_element - 1);
+    data_model->facets.push_back(first_element - 1);
   } else {
     value = stof(str);
     if (value < 0) {
-      value = data_model->count_facets_ + value;
+      value = data_model->count_facets + value;
     }
-    data_model->facets_.push_back(value - 1);
-    data_model->facets_.push_back(value - 1);
+    data_model->facets.push_back(value - 1);
+    data_model->facets.push_back(value - 1);
   }
 }
 
