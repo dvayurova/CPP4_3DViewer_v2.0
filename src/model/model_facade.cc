@@ -1,19 +1,18 @@
 #include "model_facade.h"
 
 #include <string>
-
+namespace s21 {
 void Model::ChangeModel(std::string action, double value, int axis) {
   transform_->value = value;
   transform_->axis = axis;
 
   if (action == "rotate") {
-    strategy_.SetStrategy(new Rotation());
+    transformation_.Rotate(*object_, *transform_);
   } else if (action == "scale" && value != 0) {
-    strategy_.SetStrategy(new Scaling());
+    transformation_.Scale(*object_, *transform_);
   } else if (action == "move") {
-    strategy_.SetStrategy(new Translation());
+    transformation_.Translate(*object_, *transform_);
   }
-  strategy_.ExecuteTransformStrategy(*object_, *transform_);
 }
 
 void Model::Clear() {
@@ -41,18 +40,14 @@ bool Model::ReadDataFile(std::string &file_name) {
     parcer_->ReadFile(file_name, object_);
   } else
     res = false;
-
-  std::cout << "!facets count = " << object_->count_facets_ << "\n";
-  std::cout << "==facets size = " << object_->facets_.size() << "\n";
   return res;
 }
 
 unsigned int Model::GetVertexCount() { return object_->count_vertex_; }
 unsigned int Model::GetEdgesCount() { return object_->count_edges_; }
 unsigned int Model::GetFacetsCount() { return object_->count_facets_ * 2; }
-// std::vector<double> Model::GetVertexes() { return object_->vertexes_; }
-// std::vector<unsigned int> Model::GetFacets() { return object_->facets_; }
 double *Model::GetVertexes() { return object_->vertexes_.data(); }
 unsigned int *Model::GetFacets() { return object_->facets_.data(); }
 
 void Model::Normalize() { normalization_.Normalize(*object_); }
+} // namespace s21

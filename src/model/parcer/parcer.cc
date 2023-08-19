@@ -1,6 +1,8 @@
 #include "parcer.h"
 
-bool ReadOne::Search(std::string file_name, DataModel* data_model) {
+namespace s21 {
+
+bool ReadOne::Search(std::string file_name, DataModel *data_model) {
   bool res = true;
   std::ifstream fp(file_name);
   if (fp.is_open()) {
@@ -24,7 +26,7 @@ bool ReadOne::Search(std::string file_name, DataModel* data_model) {
   return res;
 };
 
-unsigned int ReadOne::getCountMemory(std::string& str) {
+unsigned int ReadOne::getCountMemory(std::string &str) {
   unsigned int res = 0;
   for (size_t i = 0; i <= str.size(); ++i) {
     if (str[i] >= '0' && str[i] <= '9') {
@@ -36,7 +38,7 @@ unsigned int ReadOne::getCountMemory(std::string& str) {
   return res;
 }
 
-bool ReadTwo::Search(std::string file_name, DataModel* data_model) {
+bool ReadTwo::Search(std::string file_name, DataModel *data_model) {
   bool res = true;
   std::ifstream fp(file_name);
   if (fp.is_open()) {
@@ -53,11 +55,12 @@ bool ReadTwo::Search(std::string file_name, DataModel* data_model) {
   if ((data_model->facets_.empty()) || (data_model->vertexes_.empty())) {
     res = false;
   }
+
   return res;
 }
 
-bool ReadTwo::getDigit(std::string& str, DataModel* data_model) {
-  bool res = true;  // возможно нужно переделать на void
+bool ReadTwo::getDigit(std::string &str, DataModel *data_model) {
+  bool res = true; // возможно нужно переделать на void
   std::stringstream ss(str);
   std::string buffer;
   // int step = 0;
@@ -81,25 +84,11 @@ bool ReadTwo::getDigit(std::string& str, DataModel* data_model) {
       data_model->facets_.push_back(first_element - 1);
     }
   }
-
-  // while (std::getline(ss, buffer, ' ')) {
-  //   if ((isdigit(buffer[0]) || (isdigit(buffer[1])))) {
-  //     if (str[0] == 'v') {
-  //       data_model->vertexes_.push_back(stof(buffer));
-  //     }
-  //     if (str[0] == 'f') {
-  //       PushToFacets(buffer, first_element, step, data_model);
-  //     }
-  //   }
-  // }
-  // if (step) {
-  //   data_model->facets_.push_back(first_element - 1);
-  // }
   return res;
 }
 
-void ReadTwo::PushToFacets(std::string& str, unsigned int& first_element,
-                           int& step, DataModel* data_model) {
+void ReadTwo::PushToFacets(std::string &str, unsigned int &first_element,
+                           int &step, DataModel *data_model) {
   double value = 0;
   double x = 0;
   if (step == 0) {
@@ -122,14 +111,15 @@ void ReadTwo::PushToFacets(std::string& str, unsigned int& first_element,
 
 Parser::~Parser() { delete read_; }
 
-void Parser::setStrategy(Read* read) {
+void Parser::setStrategy(Read *read) {
   if (read_ != nullptr) {
     delete read_;
   }
   read_ = read;
 }
 
-bool Parser::ReadFile(std::string name_file, DataModel* data_model) {
+bool Parser::ReadFile(std::string name_file, DataModel *data_model) {
   bool flag = read_->Search(name_file, data_model);
   return flag;
 }
+} // namespace s21

@@ -7,44 +7,21 @@
 
 #include "../data/data_model.h"
 
-class TransformationStrategy {
-public:
-  virtual ~TransformationStrategy() {}
-  virtual void TransformModel(DataModel &model, Transform &transform) = 0;
-};
+namespace s21 {
 
-class Rotation : public TransformationStrategy {
+class Transformation {
 public:
-  ~Rotation() {}
-  void TransformModel(DataModel &model, Transform &transform) override;
+  Transformation() {}
+  ~Transformation() {}
+  void Rotate(DataModel &model, Transform &transform);
+  void Scale(DataModel &model, Transform &transform);
+  void Translate(DataModel &model, Transform &transform);
 
 private:
   static constexpr double kConvertAngle = M_PI / 180;
   double GetAngle(Transform &transform);
   void SavePrevAngle(Transform &transform);
 };
-
-class Scaling : public TransformationStrategy {
-public:
-  ~Scaling() {}
-  void TransformModel(DataModel &model, Transform &transform) override;
-};
-
-class Translation : public TransformationStrategy {
-public:
-  void TransformModel(DataModel &model, Transform &transform) override;
-};
-
-class TransformationContext {
-public:
-  ~TransformationContext() {}
-  void SetStrategy(TransformationStrategy *strategy) { strategy_ = strategy; }
-  void ExecuteTransformStrategy(DataModel &model, Transform &transform) {
-    strategy_->TransformModel(model, transform);
-  }
-
-private:
-  TransformationStrategy *strategy_;
-};
+} // namespace s21
 
 #endif // TRANSFORMATION_H

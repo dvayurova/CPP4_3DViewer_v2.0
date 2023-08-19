@@ -1,6 +1,8 @@
 #include "transformation.h"
 
-void Scaling::TransformModel(DataModel &model, Transform &transform) {
+namespace s21 {
+
+void Transformation::Scale(DataModel &model, Transform &transform) {
   double scale = 0;
   double max_vertex = 0;
   max_vertex =
@@ -15,11 +17,7 @@ void Scaling::TransformModel(DataModel &model, Transform &transform) {
   }
 }
 
-void Translation::TransformModel(DataModel &model, Transform &transform) {
-  // if (transform.value < -1.6)
-  //   transform.value = -1.5;
-  // else if (transform.value > 1.6)
-  //   transform.value = 1.5;
+void Transformation::Translate(DataModel &model, Transform &transform) {
   size_t size = model.vertexes_.size();
   for (size_t i = 0; i < size; i += 3) {
     double tmp = model.vertexes_[i + transform.axis];
@@ -29,7 +27,7 @@ void Translation::TransformModel(DataModel &model, Transform &transform) {
   transform.prev_coor_[transform.axis] = transform.value;
 }
 
-void Rotation::TransformModel(DataModel &model, Transform &transform) {
+void Transformation::Rotate(DataModel &model, Transform &transform) {
   double angle = GetAngle(transform);
   double cos_value = cos(angle);
   double sin_value = sin(angle);
@@ -52,7 +50,7 @@ void Rotation::TransformModel(DataModel &model, Transform &transform) {
   SavePrevAngle(transform);
 }
 
-double Rotation::GetAngle(Transform &transform) {
+double Transformation::GetAngle(Transform &transform) {
   double angle = 0;
   double pr_a = 0;
   angle = transform.value * kConvertAngle;
@@ -66,7 +64,7 @@ double Rotation::GetAngle(Transform &transform) {
   return angle - pr_a;
 }
 
-void Rotation::SavePrevAngle(Transform &transform) {
+void Transformation::SavePrevAngle(Transform &transform) {
   if (transform.axis == kX) {
     transform.prev_angle_x = transform.value;
   } else if (transform.axis == kY) {
@@ -75,3 +73,4 @@ void Rotation::SavePrevAngle(Transform &transform) {
     transform.prev_angle_z = transform.value;
   }
 }
+} // namespace s21

@@ -4,6 +4,8 @@
 
 #include "ui_widget.h"
 
+namespace s21 {
+
 Widget::Widget(Controller *c, QWidget *parent)
     : QOpenGLWidget{parent}, ui(new Ui::Widget), controller_(c) {
   ui->setupUi(this);
@@ -215,3 +217,5 @@ void Widget::ConnectLabels() {
   connect(ui->label_z_rot, &QLineEdit::textChanged, this,
           [=] { ui->z_rotation->setValue(ui->label_z_rot->text().toInt()); });
 }
+
+} // namespace s21

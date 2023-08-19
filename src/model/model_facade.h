@@ -4,6 +4,8 @@
 #include "normalization/normalization.h"
 #include "parcer/parcer.h"
 
+namespace s21 {
+
 class Model {
 public:
   Model() {
@@ -11,7 +13,11 @@ public:
     transform_ = new Transform;
   }
 
-  ~Model() {}
+  ~Model() {
+    delete object_;
+    delete transform_;
+    delete parcer_;
+  }
   void ChangeModel(std::string action, double value, int axis);
   void Normalize();
 
@@ -19,8 +25,6 @@ public:
   unsigned int GetEdgesCount();
   unsigned int GetFacetsCount();
   void Clear();
-  // std::vector<double> GetVertexes();
-  // std::vector<unsigned int> GetFacets();
   double *GetVertexes();
   unsigned int *GetFacets();
 
@@ -28,10 +32,11 @@ public:
 
 private:
   Normalization normalization_{};
-  TransformationContext strategy_{};
+  Transformation transformation_;
   DataModel *object_;
   Transform *transform_;
   Parser *parcer_;
 };
+} // namespace s21
 
 #endif // MODEL_H_

@@ -1,6 +1,6 @@
 #include "controller_singleton.h"
 
-// namespace s21 {
+namespace s21 {
 Controller *Controller::instance_ = nullptr;
 
 Controller *Controller::Instance() {
@@ -25,12 +25,7 @@ bool Controller::ReadDataFile(std::string &file_name) {
 size_t Controller::GetVertexCount() { return model_->GetVertexCount(); }
 size_t Controller::GetEdgesCount() { return model_->GetEdgesCount(); }
 unsigned int Controller::GetFacetsCount() { return model_->GetFacetsCount(); }
-// std::vector<double> Controller::GetVertexes() { return model_->GetVertexes();
-// }
-// std::vector<unsigned int> Controller::GetFacets() {
-//   return model_->GetFacets();
-// }
 double *Controller::GetVertexes() { return model_->GetVertexes(); }
 unsigned int *Controller::GetFacets() { return model_->GetFacets(); }
 
-// } // namespace s21
+} // namespace s21

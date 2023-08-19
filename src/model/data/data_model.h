@@ -4,6 +4,8 @@
 #include <array>
 #include <vector>
 
+namespace s21 {
+
 enum Axis { kX, kY, kZ };
 
 struct DataModel {
@@ -23,5 +25,7 @@ struct Transform {
 
   std::array<double, 3> prev_coor_;
 };
+
+} // namespace s21
 
 #endif // DATA_MODEL_H_

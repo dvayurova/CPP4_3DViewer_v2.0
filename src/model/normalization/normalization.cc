@@ -1,12 +1,13 @@
 #include "normalization.h"
 
+namespace s21 {
+
 void Normalization::Normalize(DataModel &model) {
   Centering(model);
-  TransformationContext strategy;
+  Transformation transformation;
   Transform transform{};
-  strategy.SetStrategy(new Scaling());
   transform.value = kDefaultScale;
-  strategy.ExecuteTransformStrategy(model, transform);
+  transformation.Scale(model, transform);
 }
 
 void Normalization::Centering(DataModel &model) {
@@ -35,3 +36,5 @@ std::vector<double> Normalization::GetCoordinates(DataModel &model, int axis) {
   }
   return coordinates;
 }
+
+} // namespace s21

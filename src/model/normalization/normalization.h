@@ -3,6 +3,7 @@
 
 #include "../transform_strategy/transformation.h"
 
+namespace s21 {
 class Normalization {
 public:
   Normalization() {}
@@ -15,5 +16,7 @@ private:
   std::vector<double> GetCoordinates(DataModel &model, int axis);
   static constexpr double kDefaultScale = 0.3;
 };
+
+} // namespace s21
 
 #endif // NORMALIZATION_H_

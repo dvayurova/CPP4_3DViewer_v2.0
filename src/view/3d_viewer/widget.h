@@ -16,6 +16,7 @@ class Widget;
 }
 QT_END_NAMESPACE
 
+namespace s21 {
 class Widget : public QOpenGLWidget {
   Q_OBJECT
 
@@ -57,4 +58,6 @@ private slots:
   void on_z_move_down_clicked();
   void on_z_move_up_clicked();
 };
+
+} // namespace s21
 #endif // WIDGET_H

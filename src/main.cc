@@ -5,10 +5,10 @@
 int main(int argc, char *argv[]) {
   QApplication a(argc, argv);
 
-  Model model;
-  Controller *controller = Controller::Instance();
+  s21::Model model;
+  s21::Controller *controller = s21::Controller::Instance();
   controller->SetModel(&model);
-  Widget view(controller);
+  s21::Widget view(controller);
   view.setWindowTitle("3dViewer v2.0");
   view.show();
   return a.exec();

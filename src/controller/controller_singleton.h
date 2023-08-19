@@ -5,7 +5,7 @@
 
 #include <iostream>
 
-// namespace s21 {
+namespace s21 {
 
 class Controller {
 public:
@@ -21,8 +21,6 @@ public:
   void ChangeModel(std::string action, double value, int axis);
   size_t GetVertexCount();
   size_t GetEdgesCount();
-  // std::vector<double> GetVertexes();
-  // std::vector<unsigned int> GetFacets();
   double *GetVertexes();
   unsigned int *GetFacets();
   unsigned int GetFacetsCount();
@@ -35,6 +33,6 @@ private:
   Model *model_;
 };
 
-// } // namespace s21
+} // namespace s21
 
 #endif //  SRC_CONTROLLER_CONTROLLER_H_
