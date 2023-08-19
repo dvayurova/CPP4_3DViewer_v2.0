@@ -16,6 +16,9 @@ void Model::ChangeModel(std::string action, double value, int axis) {
 }
 
 void Model::Clear() {
+  if (parcer_ != nullptr) {
+    delete parcer_;
+  }
   transform_info_->prev_coor = {0};
   transform_info_->prev_angle_x = 0;
   transform_info_->prev_angle_y = 0;
@@ -50,4 +53,4 @@ double *Model::GetVertexes() { return object_->vertexes.data(); }
 unsigned int *Model::GetFacets() { return object_->facets.data(); }
 
 void Model::Normalize() { normalization_.Normalize(*object_); }
-} // namespace s21
+}  // namespace s21

@@ -7,10 +7,11 @@
 namespace s21 {
 
 class Model {
-public:
+ public:
   Model() {
     object_ = new DataModel;
     transform_info_ = new Transform;
+    parcer_ = nullptr;
   }
 
   ~Model() {
@@ -30,13 +31,13 @@ public:
 
   bool ReadDataFile(std::string &file_name);
 
-private:
+ private:
   Normalization normalization_{};
   Transformation transformation_;
   DataModel *object_;
   Transform *transform_info_;
   Parser *parcer_;
 };
-} // namespace s21
+}  // namespace s21
 
-#endif // CPP4_3DVIEWER_V2_0_1_SRC_MODEL_MODEL_H_
+#endif  // CPP4_3DVIEWER_V2_0_1_SRC_MODEL_MODEL_H_
