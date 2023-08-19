@@ -3,8 +3,6 @@
 
 #include "../model/model_facade.h"
 
-#include <iostream>
-
 namespace s21 {
 
 class Controller {

@@ -29,7 +29,6 @@ private:
   Controller *controller_;
 
   void initializeGL() override;
-  // void resizeGL(int w, int h) override;
   void paintGL() override;
   void Draw();
 
