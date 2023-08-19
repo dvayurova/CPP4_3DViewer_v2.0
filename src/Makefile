@@ -3,7 +3,7 @@ CC = g++
 CFLAGS = -Wall -Werror -Wextra -std=c++17
 OS = $(shell uname -s)
 GCOVFLAGS = -fprofile-arcs -ftest-coverage
-SRCS = unit_test/unit_tests.cc  model/*.cc model/**/*.cc
+SRCS = unit_test/unit_tests.cc model/*.cc  model/**/*.cc
 LC = lcov -c -d .
 
 all: install
