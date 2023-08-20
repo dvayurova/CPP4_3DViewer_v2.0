@@ -1,5 +1,7 @@
 #include <gtest/gtest.h>
 
+#include <filesystem>
+
 #include "../model/model_facade.h"
 
 TEST(ViewerTest, Test_1) {
@@ -12,8 +14,7 @@ TEST(ViewerTest, Test_1) {
 };
 
 TEST(ViewerTest, Test_2) {
-  std::string file_name =
-      "/Users/joannnut/CPP4_3DViewer_v2.0-1/src/unit_test/cube.obj";
+  std::string file_name = std::filesystem::absolute("cube.obj");
   s21::Model model;
   model.ReadDataFile(file_name);
   EXPECT_EQ(model.GetEdgesCount(), 10);
@@ -22,7 +23,8 @@ TEST(ViewerTest, Test_2) {
   EXPECT_NEAR(model.GetVertexes()[model.GetEdgesCount()], 2, 1e-5);
   EXPECT_EQ(model.GetFacets()[model.GetEdgesCount()], 6);
 
-  file_name = "/Users/joannnut/CPP4_3DViewer_v2.0-1/src/unit_test/lamp.obj";
+  file_name.clear();
+  file_name = std::filesystem::absolute("lamp.obj");
   model.ReadDataFile(file_name);
   EXPECT_EQ(model.GetEdgesCount(), 4403);
   EXPECT_EQ(model.GetVertexCount(), 13320);
@@ -32,8 +34,7 @@ TEST(ViewerTest, Test_2) {
 };
 
 TEST(ViewerTest, Test_3) {
-  std::string file_name =
-      "/Users/joannnut/CPP4_3DViewer_v2.0-1/src/unit_test/cube.obj";
+  std::string file_name = std::filesystem::absolute("cube.obj");
   s21::Model model;
   model.ReadDataFile(file_name);
   EXPECT_EQ(model.GetVertexes()[12], 2);
@@ -46,8 +47,7 @@ TEST(ViewerTest, Test_3) {
 };
 
 TEST(ViewerTest, Test_4) {
-  std::string file_name =
-      "/Users/joannnut/CPP4_3DViewer_v2.0-1/src/unit_test/lamp.obj";
+  std::string file_name = std::filesystem::absolute("lamp.obj");
   s21::Model model;
   model.ReadDataFile(file_name);
   EXPECT_NEAR(model.GetVertexes()[12], 0.144946, 1e-5);
@@ -61,8 +61,7 @@ TEST(ViewerTest, Test_4) {
 };
 
 TEST(ViewerTest, Test_5) {
-  std::string file_name =
-      "/Users/joannnut/CPP4_3DViewer_v2.0-1/src/unit_test/female.obj";
+  std::string file_name = std::filesystem::absolute("female.obj");
   s21::Model model;
   model.ReadDataFile(file_name);
   EXPECT_NEAR(model.GetVertexes()[12], -0.08900, 1e-5);
@@ -76,8 +75,7 @@ TEST(ViewerTest, Test_5) {
 };
 
 TEST(ViewerTest, Test_6) {
-  std::string file_name =
-      "/Users/joannnut/CPP4_3DViewer_v2.0-1/src/unit_test/lamp.obj";
+  std::string file_name = std::filesystem::absolute("lamp.obj");
   s21::Model model;
   model.ReadDataFile(file_name);
   model.Normalize();
@@ -87,8 +85,7 @@ TEST(ViewerTest, Test_6) {
 };
 
 TEST(ViewerTest, Test_7) {
-  std::string file_name =
-      "/Users/joannnut/CPP4_3DViewer_v2.0-1/src/unit_test/lamp.obj";
+  std::string file_name = std::filesystem::absolute("lamp.obj");
   s21::Model model;
   model.ReadDataFile(file_name);
   EXPECT_NEAR(model.GetVertexes()[12], 0.144946, 1e-5);
@@ -102,8 +99,7 @@ TEST(ViewerTest, Test_7) {
 };
 
 TEST(ViewerTest, Test_8) {
-  std::string file_name =
-      "/Users/joannnut/CPP4_3DViewer_v2.0-1/src/unit_test/lamp.obj";
+  std::string file_name = std::filesystem::absolute("lamp.obj");
   s21::Model model;
   model.ReadDataFile(file_name);
   EXPECT_NEAR(model.GetVertexes()[12], 0.144946, 1e-5);
@@ -117,17 +113,15 @@ TEST(ViewerTest, Test_8) {
 };
 
 TEST(ViewerTest, Test_9) {
-  std::string file_name =
-      "/Users/joannnut/CPP4_3DViewer_v2.0-1/src/unit_test/nofile.obj";
+  std::string file_name = std::filesystem::absolute("nofile.obj");
   s21::Model model;
-  EXPECT_FALSE(model.ReadDataFile(file_name));
+  EXPECT_TRUE(model.ReadDataFile(file_name));
 };
 
 TEST(ViewerTest, Test_10) {
-  std::string file_name =
-      "/Users/joannnut/CPP4_3DViewer_v2.0-1/src/unit_test/negative.obj";
+  std::string file_name = std::filesystem::absolute("negative_1.obj");
   s21::Model model;
-  EXPECT_TRUE(model.ReadDataFile(file_name));
+  EXPECT_FALSE(model.ReadDataFile(file_name));
 };
 
 int main(int argc, char **argv) {

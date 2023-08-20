@@ -48,8 +48,9 @@ endif
 	rm -f *.gcno *.gcda *.info report.out *.gcov
 	open ./report/index.html
 
-install: uninstall 
+install:
 	make clean
+	rm -fr build
 	mkdir build
 	cd view/3d_viewer && qmake && make && make clean && rm Makefile && cd ../../ && mv view/3d_viewer/3dv.app build
 	open build/3dv.app
