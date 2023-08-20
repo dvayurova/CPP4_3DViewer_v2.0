@@ -73,4 +73,4 @@ void Transformation::SavePrevAngle(Transform &transform) {
     transform.prev_angle_z = transform.value;
   }
 }
-} // namespace s21
+}  // namespace s21

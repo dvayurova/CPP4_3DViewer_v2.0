@@ -6,7 +6,7 @@
 namespace s21 {
 
 class Controller {
-public:
+ public:
   Controller(const Controller &) = delete;
   Controller(Controller &&) = delete;
   Controller &operator=(const Controller &) = delete;
@@ -24,13 +24,13 @@ public:
   unsigned int GetFacetsCount();
   bool ReadDataFile(std::string &file_name);
 
-private:
+ private:
   Controller() {}
   ~Controller() { delete instance_; }
   static Controller *instance_;
   Model *model_;
 };
 
-} // namespace s21
+}  // namespace s21
 
-#endif //  CPP4_3DVIEWER_V2_0_1_SRC_CONTROLLER_CONTROLLER_H_
+#endif  //  CPP4_3DVIEWER_V2_0_1_SRC_CONTROLLER_CONTROLLER_H_

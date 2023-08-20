@@ -37,4 +37,4 @@ std::vector<double> Normalization::GetCoordinates(DataModel &model, int axis) {
   return coordinates;
 }
 
-} // namespace s21
+}  // namespace s21

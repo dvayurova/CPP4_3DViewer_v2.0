@@ -1,4 +1,5 @@
 #include "widget.h"
+
 #include "ui_widget.h"
 
 namespace s21 {
@@ -47,6 +48,7 @@ void Widget::SetDefaultValues() {
   ui_->label_x_move->setText("0");
   ui_->label_y_move->setText("0");
   ui_->label_z_move->setText("0");
+  ui_->label_scale->setText("0.3");
 }
 
 void Widget::initializeGL() { glEnable(GL_DEPTH_TEST); }
@@ -56,8 +58,7 @@ void Widget::paintGL() {
   glClearColor(0, 0, 0, 0);
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
-  if (file_exists_)
-    Draw();
+  if (file_exists_) Draw();
 }
 
 void Widget::Draw() {
@@ -205,4 +206,4 @@ void Widget::ConnectLabels() {
           [=] { ui_->z_rotation->setValue(ui_->label_z_rot->text().toInt()); });
 }
 
-} // namespace s21
+}  // namespace s21

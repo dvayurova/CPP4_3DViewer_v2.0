@@ -89,7 +89,7 @@ TEST(ViewerTest, Test_5) {
 // EXPECT_NEAR(model.GetVertexes()[model.GetEdgesCount()], 6.93511, 1e-5);
 // EXPECT_EQ(model.GetFacets()[model.GetEdgesCount()], 13838);
 
-int main(int argc, char** argv) {
+int main(int argc, char **argv) {
   testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }

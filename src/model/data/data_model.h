@@ -26,6 +26,6 @@ struct Transform {
   std::array<double, 3> prev_coor;
 };
 
-} // namespace s21
+}  // namespace s21
 
-#endif // CPP4_3DVIEWER_V2_0_1_SRC_MODEL_DATA_DATA_MODEL_H_
+#endif  // CPP4_3DVIEWER_V2_0_1_SRC_MODEL_DATA_DATA_MODEL_H_

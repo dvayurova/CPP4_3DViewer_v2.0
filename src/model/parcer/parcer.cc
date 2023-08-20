@@ -120,4 +120,4 @@ bool Parser::ReadFile(std::string name_file, DataModel *data_model) {
   bool flag = read_->Search(name_file, data_model);
   return flag;
 }
-} // namespace s21
+}  // namespace s21

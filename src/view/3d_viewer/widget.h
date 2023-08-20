@@ -20,11 +20,11 @@ namespace s21 {
 class Widget : public QOpenGLWidget {
   Q_OBJECT
 
-public:
+ public:
   Widget(Controller *c, QWidget *parent = nullptr);
   ~Widget();
 
-private:
+ private:
   Ui::Widget *ui_;
   Controller *controller_;
 
@@ -42,7 +42,7 @@ private:
   QDoubleValidator *move_validator_;
   QDoubleValidator *scale_validator_;
 
-private slots:
+ private slots:
   void on_pushButton_clicked();
   void on_button_scale_down_clicked();
   void on_button_scale_up_clicked();
@@ -61,5 +61,5 @@ private slots:
   void on_z_move_up_clicked();
 };
 
-} // namespace s21
-#endif // CPP4_3DVIEWER_V2_0_1_SRC_VIEW_3D_VIEWER_WIDGET_H
+}  // namespace s21
+#endif  // CPP4_3DVIEWER_V2_0_1_SRC_VIEW_3D_VIEWER_WIDGET_H

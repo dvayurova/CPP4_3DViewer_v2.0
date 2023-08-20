@@ -8,19 +8,19 @@
 #include "../data/data_model.h"
 namespace s21 {
 class Read {
-public:
+ public:
   virtual ~Read(){};
   virtual bool Search(std::string name_file, DataModel *data_model) = 0;
 };
 
 class ReadOne : public Read {
-public:
+ public:
   bool Search(std::string name_file, DataModel *data_model) override;
   unsigned int getCountMemory(std::string &str);
 };
 
 class ReadTwo : public Read {
-public:
+ public:
   bool Search(std::string name_file, DataModel *data_model) override;
   bool getDigit(std::string &str, DataModel *data_model);
   void PushToFacets(std::string &str, unsigned int &first_element, int &step,
@@ -28,14 +28,14 @@ public:
 };
 
 class Parser {
-public:
+ public:
   Parser(Read *read) : read_(read){};
   ~Parser();
   void setStrategy(Read *read);
   bool ReadFile(std::string name_file, DataModel *data_model);
 
-private:
+ private:
   Read *read_;
 };
-} // namespace s21
-#endif // CPP4_3DVIEWER_V2_0_1_SRC_MODEL_PARCER_PARCER_H_
+}  // namespace s21
+#endif  // CPP4_3DVIEWER_V2_0_1_SRC_MODEL_PARCER_PARCER_H_

@@ -3,7 +3,7 @@ CC = g++
 CFLAGS = -Wall -Werror -Wextra -std=c++17
 OS = $(shell uname -s)
 GCOVFLAGS = -fprofile-arcs -ftest-coverage
-SRCS = unit_test/unit_tests.cc model/*.cc  model/**/*.cc
+SRCS = unit_test/unit_tests.cc  model/*.cc model/**/*.cc
 LC = lcov -c -d .
 
 all: install
@@ -23,6 +23,8 @@ test: clean
 	$(CC) $(CFLAGS) $(SRCS) -lgtest -pthread -o test
 	./test
 
+tests: test
+
 memcheck: test
 ifeq ($(OS), Darwin)
 	leaks -atExit -- ./test
@@ -40,25 +42,25 @@ gcov_report: clean
 	rm -f *.gcno *.gcda *.info report.out *.gcov
 	open ./gcov_report/index-sort-f.html
 
-#install: uninstall 
-#       make clean
-#       mkdir build
-#       cd SmartCalc2 && qmake && make && make clean && rm Makefile && cd ../ && mv SmartCalc2/SmartCalc2.app build
+install: uninstall 
+	make clean
+	mkdir build
+	cd view/3d_viewer && qmake && make && make clean && rm Makefile && cd ../../ && mv view/3d_viewer/3dv.app build
 
-#uninstall:
-#       rm -rf build
+uninstall:
+	rm -rf build
 
 
-dist:
-	rm -rf Archive_SmartCalc2/
-	mkdir Archive_SmartCalc2/
-	mkdir Archive_SmartCalc2/src
-	mv ./build/SmartCalc2.app Archive_SmartCalc2/src/
-	tar cvzf Archive_SmartCalc2.tgz Archive_SmartCalc2/
-	rm -rf Archive_SmartCalc2/
+dist: install
+	rm -rf Archive_3dv/
+	mkdir Archive_3dv/
+	mkdir Archive_3dv/src
+	mv ./build/3dv.app Archive_3dv/src/
+	tar cvzf Archive_3dv.tgz Archive_3dv/
+	rm -rf Archive_3dv/
 
 dvi:
-	open README_SmartCalc.md 
+	open readme_3dviewer.md 
 
 check:
 	cp ../materials/linters/.clang-format ./

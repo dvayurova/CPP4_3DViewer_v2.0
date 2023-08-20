@@ -28,4 +28,4 @@ unsigned int Controller::GetFacetsCount() { return model_->GetFacetsCount(); }
 double *Controller::GetVertexes() { return model_->GetVertexes(); }
 unsigned int *Controller::GetFacets() { return model_->GetFacets(); }
 
-} // namespace s21
+}  // namespace s21

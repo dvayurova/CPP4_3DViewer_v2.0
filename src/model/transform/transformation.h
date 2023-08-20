@@ -10,18 +10,18 @@
 namespace s21 {
 
 class Transformation {
-public:
+ public:
   Transformation() {}
   ~Transformation() {}
   void Rotate(DataModel &model, Transform &transform);
   void Scale(DataModel &model, Transform &transform);
   void Translate(DataModel &model, Transform &transform);
 
-private:
+ private:
   static constexpr double kConvertAngle = M_PI / 180;
   double GetAngle(Transform &transform);
   void SavePrevAngle(Transform &transform);
 };
-} // namespace s21
+}  // namespace s21
 
-#endif // CPP4_3DVIEWER_V2_0_1_SRC_MODEL_TRANSFORM_TRANSFORMATION_H
+#endif  // CPP4_3DVIEWER_V2_0_1_SRC_MODEL_TRANSFORM_TRANSFORMATION_H
