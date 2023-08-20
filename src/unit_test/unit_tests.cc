@@ -115,11 +115,11 @@ TEST(ViewerTest, Test_8) {
 TEST(ViewerTest, Test_9) {
   std::string file_name = std::filesystem::absolute("nofile.obj");
   s21::Model model;
-  EXPECT_TRUE(model.ReadDataFile(file_name));
+  EXPECT_FALSE(model.ReadDataFile(file_name));
 };
 
 TEST(ViewerTest, Test_10) {
-  std::string file_name = std::filesystem::absolute("negative_1.obj");
+  std::string file_name = std::filesystem::absolute("negative.obj");
   s21::Model model;
   EXPECT_FALSE(model.ReadDataFile(file_name));
 };
