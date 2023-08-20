@@ -64,9 +64,11 @@ bool ReadTwo::getDigit(std::string &str, DataModel *data_model) {
   std::stringstream ss(str);
   std::string buffer;
   if (str[0] == 'v') {
-    while (std::getline(ss, buffer, ' ')) {
+    int count = 0;
+    while ((std::getline(ss, buffer, ' ')) && (count < 3)) {
       if ((isdigit(buffer[0]) || (isdigit(buffer[1])))) {
         data_model->vertexes.push_back(stof(buffer));
+        ++count;
       }
     }
   }
