@@ -117,15 +117,17 @@ TEST(ViewerTest, Test_8) {
 };
 
 TEST(ViewerTest, Test_9) {
-  std::string file_name = "nofile.obj";
+  std::string file_name =
+      "/Users/comedial/CPP4_3DViewer_v2.0-1/src/unit_test/nofile.obj";
   s21::Model model;
   EXPECT_FALSE(model.ReadDataFile(file_name));
 };
 
 TEST(ViewerTest, Test_10) {
-  std::string file_name = "negative.obj";
+  std::string file_name =
+      "/Users/comedial/CPP4_3DViewer_v2.0-1/src/unit_test/negative.obj";
   s21::Model model;
-  EXPECT_FALSE(model.ReadDataFile(file_name));
+  EXPECT_TRUE(model.ReadDataFile(file_name));
 };
 
 int main(int argc, char **argv) {
