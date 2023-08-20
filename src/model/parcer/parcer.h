@@ -23,7 +23,7 @@ class ReadTwo : public Read {
  public:
   bool Search(std::string name_file, DataModel *data_model) override;
   bool getDigit(std::string &str, DataModel *data_model);
-  void PushToFacets(std::string &str, unsigned int &first_element, int &step,
+  bool PushToFacets(std::string &str, unsigned int &first_element, int &step,
                     DataModel *data_model);
 };
 

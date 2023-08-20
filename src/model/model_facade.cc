@@ -40,7 +40,7 @@ bool Model::ReadDataFile(std::string &file_name) {
   parcer_ = new Parser(new ReadOne);
   if (parcer_->ReadFile(file_name, object_)) {
     parcer_->setStrategy(new ReadTwo);
-    parcer_->ReadFile(file_name, object_);
+    res = parcer_->ReadFile(file_name, object_);
   } else
     res = false;
   return res;

@@ -71,9 +71,9 @@ bool ReadTwo::getDigit(std::string &str, DataModel *data_model) {
   if (str[0] == 'f') {
     int step = 0;
     unsigned int first_element = 0;
-    while (std::getline(ss, buffer, ' ')) {
+    while ((std::getline(ss, buffer, ' ')) && (res)) {
       if ((isdigit(buffer[0]) || (isdigit(buffer[1])))) {
-        PushToFacets(buffer, first_element, step, data_model);
+        res = PushToFacets(buffer, first_element, step, data_model);
       }
     }
     if (step) {
@@ -83,8 +83,9 @@ bool ReadTwo::getDigit(std::string &str, DataModel *data_model) {
   return res;
 }
 
-void ReadTwo::PushToFacets(std::string &str, unsigned int &first_element,
+bool ReadTwo::PushToFacets(std::string &str, unsigned int &first_element,
                            int &step, DataModel *data_model) {
+  bool res = true;
   double value = 0;
   double x = 0;
   if (step == 0) {
@@ -92,21 +93,24 @@ void ReadTwo::PushToFacets(std::string &str, unsigned int &first_element,
     if (!str.empty()) {
       x = stof(str);
       if (x < 0) {
-        x = data_model->count_facets + x;
+        res = false;
+      } else {
+        first_element = x;
+        data_model->facets.push_back(first_element - 1);
       }
-      first_element = x;
-      data_model->facets.push_back(first_element - 1);
     }
   } else {
     if (!str.empty()) {
       value = stof(str);
       if (value < 0) {
-        value = data_model->count_facets + value;
+        res = false;
+      } else {
+        data_model->facets.push_back(value - 1);
+        data_model->facets.push_back(value - 1);
       }
-      data_model->facets.push_back(value - 1);
-      data_model->facets.push_back(value - 1);
     }
   }
+  return res;
 }
 
 Parser::~Parser() { delete read_; }
