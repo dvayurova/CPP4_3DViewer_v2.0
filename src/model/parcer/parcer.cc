@@ -41,17 +41,13 @@ unsigned int ReadOne::getCountMemory(std::string &str) {
 bool ReadTwo::Search(std::string file_name, DataModel *data_model) {
   bool res = true;
   std::ifstream fp(file_name);
-  if (fp.is_open()) {
-    std::string str = "";
-    while (std::getline(fp, str)) {
-      if (((str[0] == 'v') || (str[0] == 'f')) && (str[1] == ' ')) {
-        getDigit(str, data_model);
-      }
+  std::string str = "";
+  while (std::getline(fp, str)) {
+    if (((str[0] == 'v') || (str[0] == 'f')) && (str[1] == ' ')) {
+      getDigit(str, data_model);
     }
-    fp.close();
-  } else {
-    res = false;
   }
+  fp.close();
   if ((data_model->facets.empty()) || (data_model->vertexes.empty())) {
     res = false;
   }
@@ -68,7 +64,7 @@ bool ReadTwo::getDigit(std::string &str, DataModel *data_model) {
     while ((std::getline(ss, buffer, ' ')) && (count < 3)) {
       if ((isdigit(buffer[0]) || (isdigit(buffer[1])))) {
         data_model->vertexes.push_back(stof(buffer));
-        ++count;
+        count++;
       }
     }
   }
@@ -93,19 +89,23 @@ void ReadTwo::PushToFacets(std::string &str, unsigned int &first_element,
   double x = 0;
   if (step == 0) {
     step = 1;
-    x = stof(str);
-    if (x < 0) {
-      x = data_model->count_facets + x;
+    if (!str.empty()) {
+      x = stof(str);
+      if (x < 0) {
+        x = data_model->count_facets + x;
+      }
+      first_element = x;
+      data_model->facets.push_back(first_element - 1);
     }
-    first_element = x;
-    data_model->facets.push_back(first_element - 1);
   } else {
-    value = stof(str);
-    if (value < 0) {
-      value = data_model->count_facets + value;
+    if (!str.empty()) {
+      value = stof(str);
+      if (value < 0) {
+        value = data_model->count_facets + value;
+      }
+      data_model->facets.push_back(value - 1);
+      data_model->facets.push_back(value - 1);
     }
-    data_model->facets.push_back(value - 1);
-    data_model->facets.push_back(value - 1);
   }
 }
 

@@ -4,7 +4,10 @@ CFLAGS = -Wall -Werror -Wextra -std=c++17
 OS = $(shell uname -s)
 GCOVFLAGS = -fprofile-arcs -ftest-coverage
 SRCS = unit_test/unit_tests.cc  model/*.cc model/**/*.cc
-LC = lcov -c -d . 
+LC = lcov -c -d .
+LIBS=-lgtest
+LINUX=-lgtest -lm -lpthread -lrt
+
 
 all: install
 
@@ -34,17 +37,16 @@ endif
 
 
 gcov_report: clean 
-	$(CC) $(CFLAGS) $(GCOVFLAGS) -o gcov_test -lgtest -pthread  $(SRCS) 
-	./gcov_test 
-	$(LC) -t "gcov_report" --no-external -o report.info || true 
-	geninfo . --ignore-errors mismatch --output-filename report.info 
-	lcov -r report.info '/usr/local/include/*' 'Library/*' -o filtered_report.info 
-	genhtml -o gcov_report filtered_report.info 
-	rm -f *.gcno *.gcda *.info report.out *.gcov 
-	open ./gcov_report/index-sort-f.html 
-
-
-
+ifeq ($(OS), Darwin)
+	$(CC) $(GCOVFLAGS) $(CFLAGS) $(SRCS) -o report.out $(LIBS)
+else
+	$(CC) $(GCOVFLAGS) $(CFLAGS) $(SRCS) -o report.out $(LINUX)
+endif
+	./report.out
+	lcov -t "gcov_report" --ignore-errors mismatch -o report.info --no-external -c -d .
+	genhtml -o report/ report.info
+	rm -f *.gcno *.gcda *.info report.out *.gcov
+	open ./report/index.html
 
 install: uninstall 
 	make clean
