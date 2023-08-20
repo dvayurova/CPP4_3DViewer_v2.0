@@ -1,7 +1,8 @@
 #include <gtest/gtest.h>
 
-#include "../model/model_facade.h"
 #include <filesystem>
+
+#include "../model/model_facade.h"
 
 TEST(ViewerTest, Test_1) {
   std::string file_name = "";
