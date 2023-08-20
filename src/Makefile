@@ -50,7 +50,7 @@ install: uninstall
 	make clean
 	mkdir build
 	cd view/3d_viewer && qmake && make && make clean && rm Makefile && cd ../../ && mv view/3d_viewer/3dv.app build
-	open ./build/3dv.app
+	open build/3dv.app
 
 uninstall:
 	rm -rf build*
