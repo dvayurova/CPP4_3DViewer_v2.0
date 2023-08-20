@@ -53,7 +53,7 @@ install: uninstall
 	open ./build/3dv.app
 
 uninstall:
-	rm -rf build
+	rm -rf build*
 
 
 dist: install
