@@ -44,7 +44,10 @@ bool ReadTwo::Search(std::string file_name, DataModel *data_model) {
   std::string str = "";
   while (std::getline(fp, str)) {
     if (((str[0] == 'v') || (str[0] == 'f')) && (str[1] == ' ')) {
-      getDigit(str, data_model);
+      res = getDigit(str, data_model);
+    }
+    if (res == false) {
+      return res;
     }
   }
   fp.close();
@@ -75,8 +78,12 @@ bool ReadTwo::getDigit(std::string &str, DataModel *data_model) {
       if ((isdigit(buffer[0]) || (isdigit(buffer[1])))) {
         res = PushToFacets(buffer, first_element, step, data_model);
       }
+      if (res == false) {
+        return res;
+      }
     }
-    if (step) {
+
+    if (step && res) {
       data_model->facets.push_back(first_element - 1);
     }
   }
@@ -86,28 +93,19 @@ bool ReadTwo::getDigit(std::string &str, DataModel *data_model) {
 bool ReadTwo::PushToFacets(std::string &str, unsigned int &first_element,
                            int &step, DataModel *data_model) {
   bool res = true;
-  double value = 0;
   double x = 0;
-  if (step == 0) {
-    step = 1;
-    if (!str.empty()) {
-      x = stof(str);
-      if (x < 0) {
-        res = false;
-      } else {
-        first_element = x;
-        data_model->facets.push_back(first_element - 1);
-      }
+  if (!str.empty()) {
+    x = stof(str);
+    if (x < 0) {
+      return false;
     }
-  } else {
-    if (!str.empty()) {
-      value = stof(str);
-      if (value < 0) {
-        res = false;
-      } else {
-        data_model->facets.push_back(value - 1);
-        data_model->facets.push_back(value - 1);
-      }
+    if (step == 0) {
+      step = 1;
+      first_element = x;
+      data_model->facets.push_back(first_element - 1);
+    } else {
+      data_model->facets.push_back(x - 1);
+      data_model->facets.push_back(x - 1);
     }
   }
   return res;
