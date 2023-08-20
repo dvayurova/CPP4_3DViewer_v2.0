@@ -59,7 +59,7 @@ uninstall:
 	rm -rf build*
 
 
-dist: install
+dist:
 	rm -rf Archive_3dv/
 	mkdir Archive_3dv/
 	mkdir Archive_3dv/src
