@@ -29,7 +29,7 @@ void Widget::on_pushButton_clicked() {
       SetDefaultValues();
       controller_->Normalize();
       ui_->label_Vertexes->setText(
-          QString::number(controller_->GetVertexCount()));
+          QString::number(controller_->GetVertexCount() / 3));
       ui_->label_edges->setText(QString::number(controller_->GetEdgesCount()));
       update();
     } else {
